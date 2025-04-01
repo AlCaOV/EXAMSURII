@@ -12,12 +12,13 @@
     <div class="container">
         <h1>Please Fill Out the Form</h1>
         <p>Providing accurate information about the discipline helps us maintain quality education records.</p>
-        <form>
-            <input type="text" name="facultyName" placeholder="Faculty Name (e.g., Engineering)" required>
-            <input type="number" name="Lgroup" placeholder="Group Number (e.g., 101)" required>
-            <input type="number" name="facultyNumber" placeholder="Faculty Number (e.g., 12345)" required>
-            <input type="number" step="0.1" name="gradeInDiscipline" placeholder="Grade in Discipline (e.g., 85.5)" required>
-            <input type="number" name="course" placeholder="Course (e.g., 3)" required>
+        <form action="">
+             <label for="discipline">Faculty Name:</label>
+            <input type="text" id="discipline" name="facultyName" placeholder="Faculty Name (e.g., Engineering)" required>
+            <input type="number" id="discipline" name="Lgroup" placeholder="Group Number (e.g., 101)" required>
+            <input type="number" id ="discipline"name="facultyNumber" placeholder="Faculty Number (e.g., 12345)" required>
+            <input type="number" step="0.1" id="discipline" name="gradeInDiscipline" placeholder="Grade in Discipline (e.g., 85.5)" required>
+            <input type="number" id="discipline" name="course" placeholder="Course (e.g., 3)" required>
             <button id="submitBtn" type="submit">Submit</button>
         </form>
     </div>
