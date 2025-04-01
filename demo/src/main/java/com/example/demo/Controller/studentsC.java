@@ -1,11 +1,19 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.students;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/students")
 public class studentsC {
+    @GetMapping("/form")
+    public String showForm(Model model ) {
+        model.addAttribute("students",  new students());
+        return "html/students/students_form";
+    };
+
     @PostMapping
     public Integer Createstudents(@RequestBody students students) {
         return students.addstudents(students.getfaculty_name(),students.getfirst_name(),students.getlast_name(),students.getmiddle_name(),students.getgradebook_number(),students.getLgroup(),students.getfaculty_number(),students.getgrade_in_discipline1(),students.getgrade_in_discipline2(),students.getgrade_in_discipline3(),students.getCourse());
