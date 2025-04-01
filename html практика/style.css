@@ -1,58 +1,156 @@
+/* Загальні стилі */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;     
-    height: 100vh;
+    background-color: #f3e5f5; /* Світло-фіолетовий фон */
     margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
+/* Заголовки */
 h1 {
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 18px; /* Менший заголовок */
-}
-
-.container {
-    background: white;
-    padding: 10px; /* Ще менші внутрішні відступи */
-    border-radius: 6px; /* Трохи зменшений радіус */
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    width: 85%;
-    max-width: 250px; /* Ще менша ширина форми */
-    text-align: center;
-}
-
-p {
-    color: #666;
-    margin-bottom: 10px;
-    font-size: 12px; /* Зменшений шрифт */
-}
-
-input {
-    width: 100%;
-    padding: 6px; /* Менші відступи */
-    margin: 4px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 12px; /* Зменшений шрифт */
-}
-
-button {
-    width: 100%;
-    padding: 6px; /* Зменшені кнопки */
-    background-color: #007BFF;
     color: white;
+    background: #7b1fa2; /* Глибокий фіолетовий */
+    padding: 20px;
+    margin: 0;
+    border-radius: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+    color: #6a1b9a;
+    margin-top: 20px;
+}
+
+/* Форма */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(123, 31, 162, 0.3);
+    width: 300px;
+    margin: 20px auto;
+    text-align: left;
+    animation: slideUp 0.8s ease-in-out;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    color: #4a148c;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ba68c8;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: #7b1fa2;
+    box-shadow: 0px 0px 8px rgba(123, 31, 162, 0.5);
+    outline: none;
+}
+
+/* Кнопки */
+button {
+    background: #ce93d8; /* Ніжний фіолетовий */
+    color: #4a148c;
     border: none;
-    border-radius: 4px;
-    font-size: 12px; /* Менший текст */
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 14px;
+    transition: 0.3s;
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: #ab47bc; /* Насиченіший фіолетовий */
+    color: white;
+    transform: scale(1.05);
+}
+
+#send {
+    display: none;
+    background: #8e24aa; /* Темніший фіолетовий */
+}
+
+#send:hover {
+    background: #6a1b9a;
+}
+
+/* Таблиця */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0px 0px 15px rgba(123, 31, 162, 0.3);
+    animation: slideUp 1s ease-in-out;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ba68c8;
+}
+
+th {
+    background: #7b1fa2;
+    color: white;
+}
+
+/* Посилання */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #8e24aa;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+ul li a:hover {
+    color: #4a148c;
+    text-decoration: underline;
+}
+
+/* Анімації */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
