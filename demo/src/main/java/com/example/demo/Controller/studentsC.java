@@ -14,6 +14,7 @@ public class studentsC {
         return "html/students/students_form";
     };
 
+
     @PostMapping
     public Integer Createstudents(@RequestBody students students) {
         return students.addstudents(students.getfaculty_name(),students.getfirst_name(),students.getlast_name(),students.getmiddle_name(),students.getgradebook_number(),students.getLgroup(),students.getfaculty_number(),students.getgrade_in_discipline1(),students.getgrade_in_discipline2(),students.getgrade_in_discipline3(),students.getCourse());
