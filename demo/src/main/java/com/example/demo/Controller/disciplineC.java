@@ -23,13 +23,15 @@ public class disciplineC {
     };
 
     // READ (Отримання списку дисциплін)
+
     @GetMapping("/index")
     public String getdisciplineIndexView(Model model) {
         discipline discipline = new discipline();
-        List<discipline> disciplinelist = discipline.listdiscipline();
-        model.addAttribute("discipline", disciplinelist);
+        List<discipline> disciplineslist = discipline.ListdisciplineList();
+        model.addAttribute("discipline", disciplineslist);
         return "html/discipline/discipline_index";
     }
+
 
     @Autowired
     private DisciplineRepository DisciplineRepository;

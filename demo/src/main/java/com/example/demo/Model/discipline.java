@@ -86,6 +86,25 @@ public class discipline {
     public void setCourse(int Course) {
         this.Course = Course;
     }
+    public List<discipline> ListdisciplineList() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        List<discipline> disciplineList = null;
+
+        try {
+            tx = session.beginTransaction();
+            disciplineList = session.createQuery("FROM discipline", discipline.class).list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return disciplineList;
+    }
     /* Method to CREATE an employee in the database */
     public Integer adddiscipline(String facname, int group, int fnumb, float discGrade, int course){
         SessionFactory factory;

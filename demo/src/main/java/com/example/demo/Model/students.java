@@ -179,7 +179,7 @@ public class students {
         return id;
     }
     /* Method to  READ all the employees */
-    public void liststudents( ){
+    public List<students> liststudents( ){
         SessionFactory factory;
         try {
             factory = new Configuration().configure().buildSessionFactory();
@@ -215,6 +215,7 @@ public class students {
         } finally {
             session.close();
         }
+        return null;
     }
     /* Method to UPDATE faculty_name for an employee */
     public void updatestudentsFacName(Integer id, String faculty_name ){

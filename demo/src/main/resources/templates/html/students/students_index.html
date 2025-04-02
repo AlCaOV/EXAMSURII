@@ -1,7 +1,7 @@
 <html lang="uk">
 <head>
-    <link rel="stylesheet" href="/css/style.css">
-     <script src="/js/students_index_test.js"defer></script>
+    <link rel="stylesheet" href="style.css">
+     <script src="students_index_test.js"defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Information</title>
@@ -26,33 +26,22 @@
                 <th>Middle Name</th>
             </tr>
             <tr>
-                <td>1</td>
-                <td>Computer Science</td>
-                <td>101</td>
-                <td>12345</td>
-                <td>85.5</td>
-                <td>90.0</td>
-                <td>78.5</td>
-                <td>3</td>
-                <td>56789</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Michael</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Engineering</td>
-                <td>202</td>
-                <td>67890</td>
-                <td>88.0</td>
-                <td>82.5</td>
-                <td>91.0</td>
-                <td>4</td>
-                <td>11223</td>
-                <td>Jane</td>
-                <td>Smith</td>
-                <td>Anne</td>
-            </tr>
+                <tbody id="table-body">
+                    <tr th:each="student : ${students}">
+                    <td th:text="${student.id}"></td>
+                    <td th:text="${student.facultyName}"></td>
+                    <td th:text="${student.group}"></td>
+                    <td th:text="${student.facultyNumber}"></td>
+                    <td th:text="${student.grade1}"></td>
+                    <td th:text="${student.grade2}"></td>
+                    <td th:text="${student.grade3}"></td>
+                    <td th:text="${student.course}"></td>
+                    <td th:text="${student.gradebook_number}"></td>
+                    <td th:text="${student.first_name}"></td>
+                    <td th:text="${student.last_name}"></td>
+                    <td th:text="${student.middle_name}"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </body>
