@@ -79,6 +79,18 @@ button:hover {
     color: white;
     transform: scale(1.05);
 }
+ul {
+    list-style-type: none; /* Вимикає маркери списку */
+    padding: 0;
+    margin: 0;
+    display: block; /* Гарантує, що список розташовується вертикально */
+}
+
+li {
+    display: block; /* Встановлює кожен елемент як блоковий */
+    padding: 8px;
+    border-bottom: 1px solid #ccc; /* Додає лінію між елементами */
+}
 
 #send {
     display: none;
