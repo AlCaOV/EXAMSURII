@@ -24,7 +24,7 @@
                 <th>Course</th>
             </tr>
             <tbody id="table_discipline">
-              <tr th:each="discipline : ${discipline}">
+              <tr th:each="discipline : ${disciplineList}">
                  <td th:text="${discipline.id}"></td>
                  <td th:text="${discipline.faculty_name}"></td>
                  <td th:text="${discipline.Lgroup}"></td>

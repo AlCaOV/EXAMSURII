@@ -65,11 +65,11 @@ public class students {
         this.id = id;
     }
 
-    public String getfaculty_name() {
+    public String getFaculty_name() {
         return faculty_name;
     }
 
-    public void setfaculty_name(String facultyname) {
+    public void setFaculty_name(String facultyname) {
         this.faculty_name = facultyname;
     }
 
@@ -81,35 +81,35 @@ public class students {
         this.Lgroup = Lgroup;
     }
 
-    public int getfaculty_number() {
+    public int getFaculty_number() {
         return faculty_number;
     }
 
-    public void setfaculty_number(int facultynumber) {
+    public void setFaculty_number(int facultynumber) {
         this.faculty_number = facultynumber;
     }
 
-    public float getgrade_in_discipline1() {
+    public float getGrade_in_discipline1() {
         return grade_in_discipline1;
     }
 
-    public void setgrade_in_discipline1(float gradeindiscipline1) {
+    public void setGrade_in_discipline1(float gradeindiscipline1) {
         this.grade_in_discipline1 = gradeindiscipline1;
     }
 
-    public float getgrade_in_discipline2() {
+    public float getGrade_in_discipline2() {
         return grade_in_discipline2;
     }
 
-    public void setgrade_in_discipline2(float gradeindiscipline2) {
+    public void setGrade_in_discipline2(float gradeindiscipline2) {
         this.grade_in_discipline2 = gradeindiscipline2;
     }
 
-    public float getgrade_in_discipline3() {
+    public float getGrade_in_discipline3() {
         return grade_in_discipline3;
     }
 
-    public void setgrade_in_discipline3(float gradeindiscipline3) {
+    public void setGrade_in_discipline3(float gradeindiscipline3) {
         this.grade_in_discipline3 = gradeindiscipline3;
     }
 
@@ -121,35 +121,35 @@ public class students {
         this.Course = Course;
     }
 
-    public int getgradebook_number() {
+    public int getGradebook_number() {
         return gradebook_number;
     }
 
-    public void setgradebook_number(int gradebooknumb) {
+    public void setGradebook_number(int gradebooknumb) {
         this.gradebook_number = gradebooknumb;
     }
 
-    public String getfirst_name() {
+    public String getFirst_name() {
         return first_name;
     }
 
-    public void setfirst_name(String firstname) {
+    public void setFirst_name(String firstname) {
         this.first_name = firstname;
     }
 
-    public String getlast_name() {
+    public String getLast_name() {
         return last_name;
     }
 
-    public void setlast_name(String lastname) {
+    public void setLast_name(String lastname) {
         this.last_name = lastname;
     }
 
-    public String getmiddle_name() {
+    public String getMiddle_name() {
         return middle_name;
     }
 
-    public void setmiddle_name(String middlename) {
+    public void setMiddle_name(String middlename) {
         this.middle_name = middlename;
     }
     /* Method to CREATE an employee in the database */
@@ -195,17 +195,17 @@ public class students {
             List Student = session.createQuery("FROM students",  students.class).list();
             for (Iterator iterator = Student.iterator(); iterator.hasNext();){
                 students students = (students) iterator.next();
-                System.out.print("Faculty Name: " + students.getfaculty_name());
-                System.out.print(" First Name: " + students.getfirst_name());
-                System.out.print(" Last Name: " + students.getlast_name());
-                System.out.print(" Middle Name: " + students.getmiddle_name());
+                System.out.print("Faculty Name: " + students.getFaculty_name());
+                System.out.print(" First Name: " + students.getFirst_name());
+                System.out.print(" Last Name: " + students.getLast_name());
+                System.out.print(" Middle Name: " + students.getMiddle_name());
                 System.out.print(" Group number: " + students.getLgroup());
-                System.out.print(" Faculty Number: " + students.getfaculty_number());
-                System.out.print(" Discipline grade 1: " + students.getgrade_in_discipline1());
-                System.out.print(" Discipline grade 2: " + students.getgrade_in_discipline2());
-                System.out.print(" Discipline grade 3: " + students.getgrade_in_discipline3());
+                System.out.print(" Faculty Number: " + students.getFaculty_number());
+                System.out.print(" Discipline grade 1: " + students.getGrade_in_discipline1());
+                System.out.print(" Discipline grade 2: " + students.getGrade_in_discipline2());
+                System.out.print(" Discipline grade 3: " + students.getGrade_in_discipline3());
                 System.out.print(" Course: " + students.getCourse());
-                System.out.print(" Gradebook number: " + students.getgradebook_number());
+                System.out.print(" Gradebook number: " + students.getGradebook_number());
                 System.out.println(" ID: " + students.getId());
             }
             tx.commit();
@@ -232,7 +232,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setfaculty_name( faculty_name );
+            students.setFaculty_name( faculty_name );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -257,7 +257,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setfirst_name( first_name );
+            students.setFirst_name( first_name );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -282,7 +282,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setlast_name( last_name );
+            students.setLast_name( last_name );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -307,7 +307,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setmiddle_name( middle_name );
+            students.setMiddle_name( middle_name );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -357,7 +357,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setfaculty_number( faculty_number );
+            students.setFaculty_number( faculty_number );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -382,7 +382,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setgrade_in_discipline1( grade_in_discipline1 );
+            students.setGrade_in_discipline1( grade_in_discipline1 );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -407,7 +407,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setgrade_in_discipline2(this.grade_in_discipline2);
+            students.setGrade_in_discipline2(this.grade_in_discipline2);
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -432,7 +432,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setgrade_in_discipline3( grade_in_discipline3 );
+            students.setGrade_in_discipline3( grade_in_discipline3 );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -482,7 +482,7 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setgradebook_number( gradebook_number );
+            students.setGradebook_number( gradebook_number );
             session.update(students);
             tx.commit();
         } catch (HibernateException e) {
@@ -507,16 +507,16 @@ public class students {
         try {
             tx = session.beginTransaction();
             students students = (students) session.get(students.class, id);
-            students.setfaculty_name( facname );
-            students.setfirst_name( firstname );
-            students.setlast_name( lastname );
-            students.setmiddle_name( middlename );
-            students.setgradebook_number( gradebooknumb );
+            students.setFaculty_name( facname );
+            students.setFirst_name( firstname );
+            students.setLast_name( lastname );
+            students.setMiddle_name( middlename );
+            students.setGradebook_number( gradebooknumb );
             students.setLgroup( group );
-            students.setfaculty_number( fnumb );
-            students.setgrade_in_discipline1( discGrade1 );
-            students.setgrade_in_discipline2( discGrade2 );
-            students.setgrade_in_discipline3( discGrade3 );
+            students.setFaculty_number( fnumb );
+            students.setGrade_in_discipline1( discGrade1 );
+            students.setGrade_in_discipline2( discGrade2 );
+            students.setGrade_in_discipline3( discGrade3 );
             students.setCourse( course );
             session.update(students);
             tx.commit();
@@ -554,6 +554,53 @@ public class students {
         } finally {
             session.close();
         }
+    }
+    public List<students> ListstudentsList() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        List<students> studentsList = null;
+
+        try {
+            tx = session.beginTransaction();
+            studentsList = session.createQuery("FROM students", students.class).list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return studentsList;
+    }
+    public students getFirststudents() { // Змінюємо тип повернення
+        SessionFactory factory;
+
+        try {
+            factory = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+
+        Session session = factory.openSession();
+        Transaction tx = null;
+        students firststudents = null; // Міняємо тип змінної
+
+        try {
+            tx = session.beginTransaction();
+            firststudents = session.createQuery("FROM students", students.class)
+                    .setMaxResults(1) // Отримуємо тільки перший запис
+                    .uniqueResult();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return firststudents; // Повертаємо Factories
     }
 }
 

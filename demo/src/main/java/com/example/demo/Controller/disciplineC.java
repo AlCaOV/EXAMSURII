@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,10 +27,16 @@ public class disciplineC {
     public String getdisciplineIndexView(Model model) {
         discipline discipline = new discipline();
         List<discipline> disciplineslist = discipline.ListdisciplineList();
-        model.addAttribute("discipline", disciplineslist);
+        model.addAttribute("disciplineList", disciplineslist);
         return "html/discipline/discipline_index";
     }
-
+    @GetMapping("/shows")
+    public String getdisciplineShowsView(Model model) {
+        discipline discipline = new discipline();
+        discipline firstFactory = discipline.getFirstdiscipline();
+        model.addAttribute("discipline", firstFactory); // Передаємо продукт, а не рядок
+        return "html/discipline/discipline_show";
+    }
 
     @Autowired
     private DisciplineRepository DisciplineRepository;
@@ -46,10 +51,10 @@ public class disciplineC {
     ) {
         // Створюємо новий об'єкт
         discipline discipline = new discipline();
-        discipline.setfaculty_name(facultyName);
+        discipline.setFaculty_name(facultyName);
         discipline.setLgroup(Lgroup);
-        discipline.setfaculty_number(facultyNumber);
-        discipline.setgrade_in_discipline(gradeInDiscipline);
+        discipline.setFaculty_number(facultyNumber);
+        discipline.setGrade_in_discipline(gradeInDiscipline);
         discipline.setCourse(course);
 
         // Зберігаємо у базу
@@ -60,7 +65,7 @@ public class disciplineC {
 
     @PostMapping
     public Integer Creatediscipline(@RequestBody discipline discipline) {
-        return discipline.adddiscipline(discipline.getfaculty_name(),discipline.getLgroup(),discipline.getfaculty_number(),discipline.getgrade_in_discipline(),discipline.getCourse());
+        return discipline.adddiscipline(discipline.getFaculty_name(),discipline.getLgroup(),discipline.getFaculty_number(),discipline.getGrade_in_discipline(),discipline.getCourse());
     }
     // Отримання всіх продуктів
     @GetMapping
@@ -71,10 +76,10 @@ public class disciplineC {
     // Оновлення продукту за ID
     @PutMapping("/{id}")
     public void updatediscipline(@PathVariable Integer id, @RequestBody discipline updateddiscipline) {
-        updateddiscipline.updatedisciplineFacName(id, updateddiscipline.getfaculty_name());
+        updateddiscipline.updatedisciplineFacName(id, updateddiscipline.getFaculty_name());
         updateddiscipline.updatedisciplineLgroup(id, updateddiscipline.getLgroup());
-        updateddiscipline.updatedisciplineFacNum(id, updateddiscipline.getfaculty_number());
-        updateddiscipline.updatedisciplineGrade(id, updateddiscipline.getgrade_in_discipline());
+        updateddiscipline.updatedisciplineFacNum(id, updateddiscipline.getFaculty_number());
+        updateddiscipline.updatedisciplineGrade(id, updateddiscipline.getGrade_in_discipline());
         updateddiscipline.updatedisciplineCourse(id, updateddiscipline.getCourse());
     }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
      <link rel="stylesheet" href="/css/style.css">
      <script src="/js/discipline_show_test.js"defer></script>
@@ -9,15 +10,15 @@
 </head>
 <body>
 
-    <div class="record-container">
-        <h2>Entity Record</h2>
-        <ul>
-            <li><strong>ID:</strong> 1</li>
-            <li><strong>Faculty Name:</strong> Engineering</li>
-            <li><strong>Group Number:</strong> 101</li>
-            <li><strong>Faculty Number:</strong> 12345</li>
-            <li><strong>Grade in Discipline:</strong> 85.5</li>
-            <li><strong>Course:</strong> 3</li>
+    <div class="container">
+        <h2>Discipline Details</h2>
+        <ul id="discipline_deteils">
+            <li><strong>ID:</strong> <span id="discipline-id" th:text="${discipline.id}"></span></li>
+            <li><strong>Faculty Name:</strong> <span id="discipline-faculty_name" th:text="${discipline.faculty_name}"></span></li> 
+            <li><strong>Group Number:</strong> <span id="discipline-Lgroup" th:text="${discipline.Lgroup}"></span></li>
+            <li><strong>Faculty Number:</strong> <span id="discipline-faculty_number" th:text="${discipline.faculty_number}"></span></li>
+            <li><strong>Grade in Discipline:</strong> <span id="discipline-grade_in_discipline" th:text="${discipline.grade_in_discipline}"></span></li>
+            <li><strong>Course:</strong> <span id="discipline-Course" th:text="${discipline.Course}"></span></li>
         </ul>
     </div>
 </body>

@@ -47,11 +47,11 @@ public class discipline {
         this.id = id;
     }
 
-    public  String getfaculty_name() {
+    public  String getFaculty_name() {
         return faculty_name;
     }
 
-    public void setfaculty_name(String facultyname) {
+    public void setFaculty_name(String facultyname) {
         this.faculty_name = facultyname;
     }
 
@@ -63,19 +63,19 @@ public class discipline {
         this.Lgroup = Lgroup;
     }
 
-    public int getfaculty_number() {
+    public int getFaculty_number() {
         return faculty_number;
     }
 
-    public void setfaculty_number(int facultynumber) {
+    public void setFaculty_number(int facultynumber) {
         this.faculty_number = facultynumber;
     }
 
-    public float getgrade_in_discipline() {
+    public float getGrade_in_discipline() {
         return grade_in_discipline;
     }
 
-    public void setgrade_in_discipline(float gradeindiscipline) {
+    public void setGrade_in_discipline(float gradeindiscipline) {
         this.grade_in_discipline = gradeindiscipline;
     }
 
@@ -105,6 +105,35 @@ public class discipline {
 
         return disciplineList;
     }
+    public discipline getFirstdiscipline() { // Змінюємо тип повернення
+        SessionFactory factory;
+
+        try {
+            factory = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+
+        Session session = factory.openSession();
+        Transaction tx = null;
+        discipline firstdiscipline = null; // Міняємо тип змінної
+
+        try {
+            tx = session.beginTransaction();
+            firstdiscipline = session.createQuery("FROM discipline", discipline.class)
+                    .setMaxResults(1) // Отримуємо тільки перший запис
+                    .uniqueResult();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return firstdiscipline; // Повертаємо Factories
+    }
+
     /* Method to CREATE an employee in the database */
     public Integer adddiscipline(String facname, int group, int fnumb, float discGrade, int course){
         SessionFactory factory;
@@ -148,10 +177,10 @@ public class discipline {
             List Disciplines = session.createQuery("FROM discipline",  discipline.class).list();
             for (Iterator iterator = Disciplines.iterator(); iterator.hasNext();){
                 discipline discipline = (discipline) iterator.next();
-                System.out.print("Faculty Name: " + discipline.getfaculty_name());
+                System.out.print("Faculty Name: " + discipline.getFaculty_name());
                 System.out.print(" Group number: " + discipline.getLgroup());
-                System.out.print(" Faculty Number: " + discipline.getfaculty_number());
-                System.out.print(" Discipline grade: " + discipline.getgrade_in_discipline());
+                System.out.print(" Faculty Number: " + discipline.getFaculty_number());
+                System.out.print(" Discipline grade: " + discipline.getGrade_in_discipline());
                 System.out.print(" Course: " + discipline.getCourse());
                 System.out.println(" ID: " + discipline.getId());
             }
@@ -179,7 +208,7 @@ public class discipline {
         try {
             tx = session.beginTransaction();
             discipline discipline = (discipline)session.get(discipline.class, id);
-            discipline.setfaculty_name( faculty_name );
+            discipline.setFaculty_name( faculty_name );
             session.update(discipline);
             tx.commit();
         } catch (HibernateException e) {
@@ -229,7 +258,7 @@ public class discipline {
         try {
             tx = session.beginTransaction();
             discipline discipline = (discipline) session.get(discipline.class, id);
-            discipline.setfaculty_number( faculty_number );
+            discipline.setFaculty_number( faculty_number );
             session.update(discipline);
             tx.commit();
         } catch (HibernateException e) {
@@ -254,7 +283,7 @@ public class discipline {
         try {
             tx = session.beginTransaction();
             discipline discipline = (discipline) session.get(discipline.class, id);
-            discipline.setgrade_in_discipline( grade_in_discipline );
+            discipline.setGrade_in_discipline( grade_in_discipline );
             session.update(discipline);
             tx.commit();
         } catch (HibernateException e) {
@@ -304,10 +333,10 @@ public class discipline {
         try {
             tx = session.beginTransaction();
             discipline discipline = (discipline)session.get(discipline.class, id);
-            discipline.setfaculty_name( facname );
+            discipline.setFaculty_name( facname );
             discipline.setLgroup( group );
-            discipline.setfaculty_number( fnumb );
-            discipline.setgrade_in_discipline( discGrade );
+            discipline.setFaculty_number( fnumb );
+            discipline.setGrade_in_discipline( discGrade );
             discipline.setCourse( Course );
             session.update(discipline);
             tx.commit();
