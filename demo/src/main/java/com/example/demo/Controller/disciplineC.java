@@ -60,7 +60,7 @@ public class disciplineC {
         // Зберігаємо у базу
         DisciplineRepository.save(discipline);
 
-        return "html/discipline/discipline_form"; // Повертає сторінку після відправки
+        return "redirect:/discipline/form"; // Повертає сторінку після відправки
     }
 
     @PostMapping
