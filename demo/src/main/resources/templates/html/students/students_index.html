@@ -15,35 +15,29 @@
             <tr>
                 <th>ID</th>
                 <th>Faculty Name</th>
-                <th>Group</th>
+                <th>Group Number</th>
                 <th>Faculty Number</th>
-                <th>Grade 1</th>
-                <th>Grade 2</th>
-                <th>Grade 3</th>
+                <th>Grade</th>
                 <th>Course</th>
-                <th>Gradebook Number</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Middle Name</th>
+                <th>Actions</th>
             </tr>
-            <tr>
-                <tbody id="table-body">
-                    <tr th:each="student : ${studentsList}">
-                    <td th:text="${student.id}"></td>
-                    <td th:text="${student.faculty_name}"></td>
-                    <td th:text="${student.Lgroup}"></td>
-                    <td th:text="${student.faculty_number}"></td>
-                    <td th:text="${student.grade_in_discipline1}"></td>
-                    <td th:text="${student.grade_in_discipline2}"></td>
-                    <td th:text="${student.grade_in_discipline3}"></td>
-                    <td th:text="${student.course}"></td>
-                    <td th:text="${student.gradebook_number}"></td>
-                    <td th:text="${student.first_name}"></td>
-                    <td th:text="${student.last_name}"></td>
-                    <td th:text="${student.middle_name}"></td>
-                </tr>
+            <tbody id="table_discipline">
+            <tr th:each="discipline : ${disciplineList}">
+                <td th:text="${discipline.id}"></td>
+                <td th:text="${discipline.faculty_name}"></td>
+                <td th:text="${discipline.Lgroup}"></td>
+                <td th:text="${discipline.faculty_number}"></td>
+                <td th:text="${discipline.grade_in_discipline}"></td>
+                <td th:text="${discipline.course}"></td>
+                <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="save-btn" style="display: none;">Save</button>
+                    <button class="delete-btn">Delete</button>
+                </td>
+            </tr>
             </tbody>
         </table>
+
     </div>
 </body>
 </html>
