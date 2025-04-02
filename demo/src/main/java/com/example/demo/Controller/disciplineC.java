@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/discipline")
 public class disciplineC {
@@ -17,6 +19,28 @@ public class disciplineC {
         model.addAttribute("discipline",  new discipline());
         return "html/discipline/discipline_form";
     };
+    // READ (Отримання списку дисциплін)
+    @GetMapping("/index")
+    public String showIndex(Model model ) {
+        model.addAttribute("discipline",  new discipline());
+        return "html/discipline/discipline_index";
+    };
+    @PostMapping("/submitDiscipline")
+    public String submitDiscipline(
+            @RequestParam String facultyName,
+            @RequestParam int Lgroup,
+            @RequestParam int facultyNumber,
+            @RequestParam Float gradeInDiscipline,
+            @RequestParam int course
+    ) {
+        System.out.println("Faculty Name: " + facultyName);
+        System.out.println("Group Number: " + Lgroup);
+        System.out.println("Faculty Number: " + facultyNumber);
+        System.out.println("Grade: " + gradeInDiscipline);
+        System.out.println("Course: " + course);
+
+        return "html/discipline/discipline_form"; // Повертає сторінку після відправки
+    }
 
     @PostMapping
     public Integer Creatediscipline(@RequestBody discipline discipline) {
