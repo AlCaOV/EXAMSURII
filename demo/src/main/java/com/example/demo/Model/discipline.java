@@ -113,7 +113,7 @@ public class discipline {
         return id;
     }
     /* Method to  READ all the employees */
-    public void listdiscipline( ){
+    public List<discipline> listdiscipline( ){
         SessionFactory factory;
         try {
             factory = new Configuration().configure().buildSessionFactory();
@@ -143,6 +143,7 @@ public class discipline {
         } finally {
             session.close();
         }
+        return null;
     }
     /* Method to UPDATE faculty_name for an employee */
     public void updatedisciplineFacName(Integer id, String faculty_name ){

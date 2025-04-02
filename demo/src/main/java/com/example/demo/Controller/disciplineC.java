@@ -2,6 +2,8 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.Model.discipline;
+import com.example.demo.Repository.DisciplineRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,25 +21,37 @@ public class disciplineC {
         model.addAttribute("discipline",  new discipline());
         return "html/discipline/discipline_form";
     };
+
     // READ (Отримання списку дисциплін)
     @GetMapping("/index")
-    public String showIndex(Model model ) {
-        model.addAttribute("discipline",  new discipline());
+    public String getdisciplineIndexView(Model model) {
+        discipline discipline = new discipline();
+        List<discipline> disciplinelist = discipline.listdiscipline();
+        model.addAttribute("discipline", disciplinelist);
         return "html/discipline/discipline_index";
-    };
+    }
+
+    @Autowired
+    private DisciplineRepository DisciplineRepository;
+
     @PostMapping("/submitDiscipline")
     public String submitDiscipline(
             @RequestParam String facultyName,
             @RequestParam int Lgroup,
             @RequestParam int facultyNumber,
-            @RequestParam Float gradeInDiscipline,
+            @RequestParam float gradeInDiscipline,
             @RequestParam int course
     ) {
-        System.out.println("Faculty Name: " + facultyName);
-        System.out.println("Group Number: " + Lgroup);
-        System.out.println("Faculty Number: " + facultyNumber);
-        System.out.println("Grade: " + gradeInDiscipline);
-        System.out.println("Course: " + course);
+        // Створюємо новий об'єкт
+        discipline discipline = new discipline();
+        discipline.setfaculty_name(facultyName);
+        discipline.setLgroup(Lgroup);
+        discipline.setfaculty_number(facultyNumber);
+        discipline.setgrade_in_discipline(gradeInDiscipline);
+        discipline.setCourse(course);
+
+        // Зберігаємо у базу
+        DisciplineRepository.save(discipline);
 
         return "html/discipline/discipline_form"; // Повертає сторінку після відправки
     }

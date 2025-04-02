@@ -1,9 +1,14 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.discipline;
 import com.example.demo.Model.students;
+import com.example.demo.Repository.DisciplineRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/students")
@@ -13,6 +18,40 @@ public class studentsC {
         model.addAttribute("students",  new students());
         return "html/students/students_form";
     };
+
+    // READ (Отримання списку дисциплін)
+    @GetMapping("/index")
+    public String getstudentsIndexView(Model model) {
+        students students = new students();
+        List<students> studentslist = students.liststudents();
+        model.addAttribute("students", studentslist);
+        return "html/students/students_index";
+    }
+
+    @Autowired
+    private DisciplineRepository DisciplineRepository;
+
+    @PostMapping("/submitDiscipline")
+    public String submitDiscipline(
+            @RequestParam String facultyName,
+            @RequestParam int Lgroup,
+            @RequestParam int facultyNumber,
+            @RequestParam float gradeInDiscipline,
+            @RequestParam int course
+    ) {
+        // Створюємо новий об'єкт
+        discipline discipline = new discipline();
+        discipline.setfaculty_name(facultyName);
+        discipline.setLgroup(Lgroup);
+        discipline.setfaculty_number(facultyNumber);
+        discipline.setgrade_in_discipline(gradeInDiscipline);
+        discipline.setCourse(course);
+
+        // Зберігаємо у базу
+        DisciplineRepository.save(discipline);
+
+        return "html/discipline/discipline_form"; // Повертає сторінку після відправки
+    }
 
 
     @PostMapping
