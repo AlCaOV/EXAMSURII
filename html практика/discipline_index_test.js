@@ -44,4 +44,18 @@
                 });
             });
         });
-    
+   document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".edit-btn, .save-btn, .delete-btn");
+
+    buttons.forEach(button => {
+        button.style.position = "relative"; // Зберігаємо розміщення відносно батьківського контейнера
+        button.style.transition = "transform 0.1s ease-out"; // Плавний ефект втечі
+
+        button.addEventListener("mouseover", function () {
+            const offsetX = (Math.random() - 0.5) * 400; // Більше зміщення по X
+            const offsetY = (Math.random() - 0.5) * 400; // Більше зміщення по Y
+            
+            button.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        });
+    });
+});
