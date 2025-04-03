@@ -39,6 +39,8 @@ public class students {
     private String last_name;
     @Column
     private String middle_name;
+    @Column
+    private Float averageGrade;
 
     public students() {
     }
@@ -56,7 +58,11 @@ public class students {
         this.middle_name = middlename;
         this.gradebook_number = gradebooknumb;
     }
-
+    @PrePersist
+    @PreUpdate
+    public void calculateAverageGrade() {
+        this.averageGrade = (this.grade_in_discipline1 + this.grade_in_discipline2 + this.grade_in_discipline3) / 3;
+    }
     public int getId() {
         return id;
     }
@@ -152,6 +158,13 @@ public class students {
     public void setMiddle_name(String middlename) {
         this.middle_name = middlename;
     }
+    public Float getAverageGrade() {
+        return averageGrade;
+    }
+    public void setAverageGrade(Float averageGrade) {
+        this.averageGrade = averageGrade;
+    }
+
     /* Method to CREATE an employee in the database */
     public Integer addstudents(String facname, String firstname, String lastname, String middlename, int gradebooknumb, int group, int fnumb, float discGrade1, float discGrade2, float discGrade3, int course){
         SessionFactory factory;
@@ -217,6 +230,7 @@ public class students {
         }
         return null;
     }
+
     /* Method to UPDATE faculty_name for an employee */
     public void updatestudentsFacName(Integer id, String faculty_name ){
         SessionFactory factory;
@@ -602,5 +616,6 @@ public class students {
         }
         return firststudents; // Повертаємо Factories
     }
+
 }
 

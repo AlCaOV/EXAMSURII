@@ -17,6 +17,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/students")
 public class studentsC {
+    
     @GetMapping("/form")
     public String showForm(Model model) {
         model.addAttribute("students", new students());
@@ -33,20 +34,26 @@ public class studentsC {
         model.addAttribute("students", studentsList);
         return "html/students/students_index";
     }
-
     @GetMapping("/shows/{id}")
     public String getStudentsById(@PathVariable("id") Long id, Model model) {
-        // Отримуємо дисципліну за ID з бази даних
-        Optional<students> students = StudentsRepository.findById(id);
+        Optional<students> studentOpt = StudentsRepository.findById(id);
 
-        if (students.isPresent()) {
-            model.addAttribute("students", students.get()); // Передаємо дисципліну в модель
+        if (studentOpt.isPresent()) {
+            students student = studentOpt.get();
+
+            // Обчислюємо середній бал
+            student.calculateAverageGrade();
+
+            // Передаємо студента в модель
+            model.addAttribute("students", student);
         } else {
-            model.addAttribute("error", "Students не знайдена"); // Якщо дисципліна не знайдена
+            model.addAttribute("error", "Student not found");
         }
 
         return "html/students/students_show"; // Повертаємо шаблон
     }
+
+
 
     @Autowired
     private StudentsRepository StudentsRepository;
@@ -140,6 +147,7 @@ public class studentsC {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete students");
         }
     }
+
 }
 
 
