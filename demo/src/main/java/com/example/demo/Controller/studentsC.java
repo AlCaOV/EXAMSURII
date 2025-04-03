@@ -1,38 +1,51 @@
 package com.example.demo.Controller;
 
 
+import com.example.demo.Model.discipline;
 import com.example.demo.Model.students;
 import com.example.demo.Repository.StudentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/students")
 public class studentsC {
     @GetMapping("/form")
-    public String showForm(Model model ) {
-        model.addAttribute("students",  new students());
+    public String showForm(Model model) {
+        model.addAttribute("students", new students());
         return "html/students/students_form";
-    };
+    }
+
+    ;
 
     // READ (Отримання списку дисциплін)
     @GetMapping("/index")
     public String getstudentsIndexView(Model model) {
         students students = new students();
         List<students> studentsList = students.ListstudentsList();
-        model.addAttribute("studentsList", studentsList);
+        model.addAttribute("students", studentsList);
         return "html/students/students_index";
     }
-    @GetMapping("/shows")
-    public String getstudentsShowsView(Model model) {
-        students students = new students();
-        students firstFactory = students.getFirststudents();
-        model.addAttribute("students", firstFactory); // Передаємо продукт, а не рядок
-        return "html/students/students_show";
+
+    @GetMapping("/shows/{id}")
+    public String getStudentsById(@PathVariable("id") Long id, Model model) {
+        // Отримуємо дисципліну за ID з бази даних
+        Optional<students> students = StudentsRepository.findById(id);
+
+        if (students.isPresent()) {
+            model.addAttribute("students", students.get()); // Передаємо дисципліну в модель
+        } else {
+            model.addAttribute("error", "Students не знайдена"); // Якщо дисципліна не знайдена
+        }
+
+        return "html/students/students_show"; // Повертаємо шаблон
     }
 
     @Autowired
@@ -75,37 +88,63 @@ public class studentsC {
 
     @PostMapping
     public Integer Createstudents(@RequestBody students students) {
-        return students.addstudents(students.getFaculty_name(),students.getFirst_name(),students.getLast_name(),students.getMiddle_name(),students.getGradebook_number(),students.getLgroup(),students.getFaculty_number(),students.getGrade_in_discipline1(),students.getGrade_in_discipline2(),students.getGrade_in_discipline3(),students.getCourse());
+        return students.addstudents(students.getFaculty_name(), students.getFirst_name(), students.getLast_name(), students.getMiddle_name(), students.getGradebook_number(), students.getLgroup(), students.getFaculty_number(), students.getGrade_in_discipline1(), students.getGrade_in_discipline2(), students.getGrade_in_discipline3(), students.getCourse());
     }
+
     // Отримання всіх продуктів
     @GetMapping
     public void getAllstudents() {
         students students = new students();
         students.liststudents();
     }
+
     // Оновлення продукту за ID
-    @PutMapping("/{id}")
-    public void updatestudents(@PathVariable Integer id, @RequestBody students updatedstudents) {
-        updatedstudents.updatestudentsFacName(id, updatedstudents.getFaculty_name());
-        updatedstudents.updatestudentsFirstName(id, updatedstudents.getFirst_name());
-        updatedstudents.updatestudentsLastName(id, updatedstudents.getLast_name());
-        updatedstudents.updatestudentsMiddleName(id, updatedstudents.getMiddle_name());
-        updatedstudents.updatestudentsGradebookNumber(id, updatedstudents.getGradebook_number());
-        updatedstudents.updatestudentsGroupNumber(id, updatedstudents.getLgroup());
-        updatedstudents.updatestudentsFacultyNumber(id, updatedstudents.getFaculty_number());
-        updatedstudents.updatestudentsGradeInDiscipline1(id, updatedstudents.getGrade_in_discipline1());
-        updatedstudents.updatestudentsGradeInDiscipline2(id, updatedstudents.getGrade_in_discipline2());
-        updatedstudents.updatestudentsGradeInDiscipline3(id, updatedstudents.getGrade_in_discipline3());
-        updatedstudents.updatestudentsCourse(id, updatedstudents.getCourse());
+    @PutMapping("update/{id}")
+    public ResponseEntity<String> updatestudents(@PathVariable Integer id, @RequestBody students updatedstudents) {
+        try {
+            students existingStudents = StudentsRepository.findById(Long.valueOf(id)).orElse(null);
+            if (existingStudents == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Students not found");
+            }
+
+            // Оновлення полів
+            existingStudents.setFaculty_name(updatedstudents.getFaculty_name());
+            existingStudents.setFaculty_number(updatedstudents.getFaculty_number());
+            existingStudents.setLgroup(updatedstudents.getLgroup());
+            existingStudents.setGrade_in_discipline1(updatedstudents.getGrade_in_discipline1());
+            existingStudents.setGrade_in_discipline2(updatedstudents.getGrade_in_discipline2());
+            existingStudents.setGrade_in_discipline3(updatedstudents.getGrade_in_discipline3());
+            existingStudents.setFirst_name(updatedstudents.getFirst_name());
+            existingStudents.setLast_name(updatedstudents.getLast_name());
+            existingStudents.setMiddle_name(updatedstudents.getMiddle_name());
+            existingStudents.setGradebook_number(updatedstudents.getGradebook_number());
+            existingStudents.setCourse(updatedstudents.getCourse());
+
+            // Збереження змін
+            StudentsRepository.save(existingStudents);
+
+            return ResponseEntity.ok("Students updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update students");
+        }
     }
 
     // Видалення продукту за ID
-    @DeleteMapping("/{id}")
-    public void deletestudents(@PathVariable Integer id) {
-        students students = new students();
-        students.deletestudents(id);
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity deletestudents (@PathVariable Integer id){
+        try {
+            students students = new students();
+            students.deletestudents(id);
+            return ResponseEntity.ok("Student deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete students");
+        }
     }
-
-
 }
+
+
+
+
+
+
 

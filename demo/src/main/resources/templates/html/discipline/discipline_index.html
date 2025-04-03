@@ -22,22 +22,32 @@
                 <th>Faculty Number</th>
                 <th>Grade</th>
                 <th>Course</th>
+                <a th:href="@{/discipline/form}">
+                    <button>Form</button>
+                </a>
+                <a th:href="@{/students/index}">
+                    <button>Перейти до Students</button>
+                </a>
             </tr>
             <tbody id="table_discipline">
-              <tr th:each="discipline : ${disciplineList}">
-                 <td th:text="${discipline.id}"></td>
-                 <td> <span th:text="${discipline.faculty_name}"></span><input type="text" class="edit-input" style="display:none" th:value="${faculty_name}"></td>
-                 <td> <span th:text="${discipline.Lgroup}"></span><input type="number" class="edit-input" style="display:none" th:value="${Lgroup}"></td>
-                 <td> <span th:text="${discipline.faculty_number}"></span><input type="number" class="edit-input" style="display:none" th:value="${faculty_number}"></td>
-                 <td> <span th:text="${discipline.grade_in_discipline}"></span><input type="number" class="edit-input" style="display:none" th:value="${grade_in_discipline}"></td>
-                 <td> <span th:text="${discipline.Course}"></span><input type="number" class="edit-input" style="display:none" th:value="${Course}"></td>
-                  <td>
-                      <button class="edit-btn">Edit</button>
-                      <button class="save-btn" style="display: none;">Save</button>
-                      <button class="delete-btn">Delete</button>
-                  </td>
+            <tr th:each="discipline: ${discipline}" th:attr="data-id=${discipline.id}">
+                <td><span th:text="${discipline.id}"></span><input type="number" class="edit-input" style="display:none" th:value="${discipline.id}"></td>
+                <td><span th:text="${discipline.faculty_name}"></span><input type="text" class="edit-input" style="display:none" th:value="${discipline.faculty_name}"></td>
+                <td><span th:text="${discipline.lgroup}"></span><input type="number" class="edit-input" style="display:none" th:value="${discipline.lgroup}"></td>
+                <td><span th:text="${discipline.faculty_number}"></span><input type="number" class="edit-input" style="display:none" th:value="${discipline.faculty_number}"></td>
+                <td><span th:text="${discipline.grade_in_discipline}"></span><input type="number" class="edit-input" style="display:none" th:value="${discipline.grade_in_discipline}"></td>
+                <td><span th:text="${discipline.course}"></span><input type="number" class="edit-input" style="display:none" th:value="${discipline.course}"></td>
+                <td>
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                    <a th:href="@{/discipline/shows/{id}(id=${discipline.id})}">
+                        <button>Перейти до дисципліни</button>
+                    </a>
+
+                </td>
             </tr>
             </tbody>
+
         </table>
     </div>
 </body>

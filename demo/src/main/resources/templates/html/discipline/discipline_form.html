@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
      <link rel="stylesheet" href="/css/style.css">
      <script src="/js/discipline_form_test.js" defer></script>
@@ -12,6 +12,9 @@
     <div class="container">
         <h1>Please Fill Out the Form</h1>
         <p>Providing accurate information about the discipline helps us maintain quality education records.</p>
+        <a th:href="@{/discipline/index}">
+            <button>Перейти до Discipline</button>
+        </a>
         <form action="/discipline/submitDiscipline" method="post">
             <label for="facultyName">Faculty Name:</label>
             <input type="text" id="facultyName" name="facultyName" placeholder="Faculty Name" required>

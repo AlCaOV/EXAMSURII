@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/discipline")
@@ -29,16 +30,23 @@ public class disciplineC {
     public String getdisciplineIndexView(Model model) {
         discipline discipline = new discipline();
         List<discipline> disciplineslist = discipline.ListdisciplineList();
-        model.addAttribute("disciplineList", disciplineslist);
+        model.addAttribute("discipline", disciplineslist);
         return "html/discipline/discipline_index";
     }
-    @GetMapping("/shows")
-    public String getdisciplineShowsView(Model model) {
-        discipline discipline = new discipline();
-        discipline firstFactory = discipline.getFirstdiscipline();
-        model.addAttribute("discipline", firstFactory); // Передаємо продукт, а не рядок
-        return "html/discipline/discipline_show";
+    @GetMapping("/shows/{id}")
+    public String getDisciplineById(@PathVariable("id") Long id, Model model) {
+        // Отримуємо дисципліну за ID з бази даних
+        Optional<discipline> discipline = DisciplineRepository.findById(id);
+
+        if (discipline.isPresent()) {
+            model.addAttribute("discipline", discipline.get()); // Передаємо дисципліну в модель
+        } else {
+            model.addAttribute("error", "Дисципліна не знайдена"); // Якщо дисципліна не знайдена
+        }
+
+        return "html/discipline/discipline_show"; // Повертаємо шаблон
     }
+
 
     @Autowired
     private DisciplineRepository DisciplineRepository;
@@ -76,13 +84,28 @@ public class disciplineC {
         discipline.listdiscipline();
     }
     // Оновлення продукту за ID
-    @PutMapping("/{id}")
-    public void updatediscipline(@PathVariable Integer id, @RequestBody discipline updateddiscipline) {
-        updateddiscipline.updatedisciplineFacName(id, updateddiscipline.getFaculty_name());
-        updateddiscipline.updatedisciplineLgroup(id, updateddiscipline.getLgroup());
-        updateddiscipline.updatedisciplineFacNum(id, updateddiscipline.getFaculty_number());
-        updateddiscipline.updatedisciplineGrade(id, updateddiscipline.getGrade_in_discipline());
-        updateddiscipline.updatedisciplineCourse(id, updateddiscipline.getCourse());
+    @PutMapping("update/{id}")
+    public ResponseEntity<String> updatediscipline(@PathVariable Integer id, @RequestBody discipline updateddiscipline) {
+        try {
+            discipline existingDiscipline = DisciplineRepository.findById(Long.valueOf(id)).orElse(null);
+            if (existingDiscipline == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Discipline not found");
+            }
+
+            // Оновлення полів
+            existingDiscipline.setFaculty_name(updateddiscipline.getFaculty_name());
+            existingDiscipline.setFaculty_number(updateddiscipline.getFaculty_number());
+            existingDiscipline.setLgroup(updateddiscipline.getLgroup());
+            existingDiscipline.setGrade_in_discipline(updateddiscipline.getGrade_in_discipline());
+            existingDiscipline.setCourse(updateddiscipline.getCourse());
+
+            // Збереження змін
+            DisciplineRepository.save(existingDiscipline);
+
+            return ResponseEntity.ok("Discipline updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update discipline");
+        }
     }
 
     // Видалення продукту за ID

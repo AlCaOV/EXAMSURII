@@ -20,13 +20,13 @@ public class discipline {
     @Column
     private String faculty_name;
     @Column
-    private int Lgroup;
+    private Integer Lgroup;
     @Column
     private int faculty_number;
     @Column
     private float grade_in_discipline;
     @Column
-    private int Course;
+    private Integer Course;
 
     public discipline() {
     }
@@ -55,7 +55,7 @@ public class discipline {
         this.faculty_name = facultyname;
     }
 
-    public int getLgroup() {
+    public Integer getLgroup() {
         return Lgroup;
     }
 
@@ -79,7 +79,7 @@ public class discipline {
         this.grade_in_discipline = gradeindiscipline;
     }
 
-    public int getCourse() {
+    public Integer getCourse() {
         return Course;
     }
 

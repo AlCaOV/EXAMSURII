@@ -1,4 +1,4 @@
-<html lang="uk">
+<html lang="uk" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
      <link rel="stylesheet" href="/css/style.css">
      <script src="/js/students_form_test.js" defer></script>
@@ -10,7 +10,9 @@
     <h1>Welcome!</h1>
     <h2>Please fill out the form below:</h2>
     <h1>Форма заповнення даних</h1>
-
+    <a th:href="@{/students/index}">
+        <button>Перейти до Students</button>
+    </a>
     <div class="container">
         <form action="/students/submitStudents" method="post">
             <label for="faculty_name">Факультет:</label>
