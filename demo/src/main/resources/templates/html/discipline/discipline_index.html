@@ -26,13 +26,18 @@
             <tbody id="table_discipline">
               <tr th:each="discipline : ${disciplineList}">
                  <td th:text="${discipline.id}"></td>
-                 <td th:text="${discipline.faculty_name}"></td>
-                 <td th:text="${discipline.Lgroup}"></td>
-                 <td th:text="${discipline.faculty_number}"></td>
-                 <td th:text="${discipline.grade_in_discipline}"></td>
-                 <td th:text="${discipline.Course}"></td>
+                 <td> <span th:text="${discipline.faculty_name}"></span><input type="text" class="edit-input" style="display:none" th:value="${faculty_name}"></td>
+                 <td> <span th:text="${discipline.Lgroup}"></span><input type="number" class="edit-input" style="display:none" th:value="${Lgroup}"></td>
+                 <td> <span th:text="${discipline.faculty_number}"></span><input type="number" class="edit-input" style="display:none" th:value="${faculty_number}"></td>
+                 <td> <span th:text="${discipline.grade_in_discipline}"></span><input type="number" class="edit-input" style="display:none" th:value="${grade_in_discipline}"></td>
+                 <td> <span th:text="${discipline.Course}"></span><input type="number" class="edit-input" style="display:none" th:value="${Course}"></td>
+                  <td>
+                      <button class="edit-btn">Edit</button>
+                      <button class="save-btn" style="display: none;">Save</button>
+                      <button class="delete-btn">Delete</button>
+                  </td>
             </tr>
-            </tbody>     
+            </tbody>
         </table>
     </div>
 </body>

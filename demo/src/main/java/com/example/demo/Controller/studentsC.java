@@ -1,6 +1,6 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.discipline;
+
 import com.example.demo.Model.students;
 import com.example.demo.Repository.StudentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +69,7 @@ public class studentsC {
         // Зберігаємо у базу
         StudentsRepository.save(students);
 
-        return "html/students/students_form"; // Повертає сторінку після відправки
+        return "redirect:/students/form"; // Повертає сторінку після відправки
     }
 
 
